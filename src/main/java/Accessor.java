@@ -25,11 +25,12 @@ public class Accessor implements Runnable {
     }
 
     private synchronized void checkOneAndUpdate(Map.Entry<Path, AtomicInteger> entry) throws IOException {
+        //проблема в том что файлы проверяются всеми потоками не смотря на условие
         if (entry.getValue().intValue() == 0) {
             if (checkFile(entry.getKey(), keyText))
                 System.out.println(entry.getKey());
-            //map.put(entry.getKey(), new AtomicInteger(1));
-            entry.getValue().incrementAndGet();
+            this.map.remove(entry.getKey());
+            this.map.put(entry.getKey(), new AtomicInteger(1));
         }
     }
 
