@@ -1,2 +1,11 @@
 # Project exclude paths
 /out/
+# Compiled class file
+*.class
+
+# Package Files #
+*.jar
+*.war
+
+.idea
+*.iml
